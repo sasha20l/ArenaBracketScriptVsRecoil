@@ -65,6 +65,13 @@ namespace AntiRecoilConfigurator
             BackgroundImageLayout = ImageLayout.Stretch;
 
             InitializeComponents();
+            comboHotkey.SelectedIndexChanged += (s, e) =>
+            {
+                if (comboHotkey.SelectedItem is string key && key.StartsWith("F"))
+                {
+                    hotkeyVk = (int)Enum.Parse(typeof(Keys), key);
+                }
+            };
             InitializeDatabase();
             LoadSettings();
             Shown += (_, __) => StartHotkeyThread();
